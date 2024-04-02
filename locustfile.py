@@ -1,16 +1,11 @@
-# This is a sample Python script.
+from locust import HttpUser, between
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from tasks.task_cart import TaskCart
+from tasks.task_category import TaskCategory
+from tasks.task_product import TaskProduct
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+class MyUser(HttpUser):
+    wait_time = between(1, 3)
+    # bobot pada setiap task set
+    tasks = {TaskProduct: 3, TaskCategory: 1, TaskCart: 2}
